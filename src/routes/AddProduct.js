@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function Login() {
+function AddProduct() {
     return (
         <div>
             <h1>Login</h1>
@@ -9,4 +9,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default AddProduct;
