@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
+import { injected } from "./wallet/Connectors";
+import { useWeb3React } from "@web3-react/core";
+// import { active, account, library, connector, activate, deactivate } from './web3Instance';
 
 function Nav() {
     const [isOpen, setIsOpen] = useState(false);
+    
+    const { active, account, library, connector, activate, deactivate } = useWeb3React()
+
+    async function connect() {
+        try {
+            await activate(injected)
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
     return (
         <div>
             <nav className="bg-gray-800">
@@ -17,21 +30,19 @@ function Nav() {
                                 />
                             </div>
                             <div className="hidden md:block">
-                                <div className="ml-10 flex items-baseline space-x-4">
+                                {active ? <div className="ml-10 flex items-baseline space-x-4">
                                     <a
-                                        href="#"
+                                        href="profile"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                     >
-                                        Login
+                                        Profile
                                     </a>
-
                                     <a
                                         href="marketplace"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                     >
                                         Marketplace
                                     </a>
-
                                     <a
                                         href="about"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -39,6 +50,17 @@ function Nav() {
                                         About
                                     </a>
                                 </div>
+                                    :
+                                    <div className="ml-10 flex items-baseline space-x-4">
+                                        <button onClick={connect} className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</button>
+                                        <a
+                                        href="about"
+                                        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                        >
+                                            About
+                                        </a>
+                                    </div>}
+
                             </div>
                         </div>
                         <div className="-mr-2 flex md:hidden">
@@ -99,7 +121,7 @@ function Nav() {
                 >
                     {(ref) => (
                         <div className="md:hidden" id="mobile-menu">
-                            <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            {active ? <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                                 <a
                                     href="#"
                                     className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
@@ -120,7 +142,17 @@ function Nav() {
                                 >
                                     About
                                 </a>
-                            </div>
+                                </div>: 
+                                <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                                        <button onClick={connect} className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Login</button>
+                                        <a
+                                        href="about"
+                                        className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                                        >
+                                            About
+                                        </a>
+                                    </div>
+                                    }
                         </div>
                     )}
                 </Transition>
