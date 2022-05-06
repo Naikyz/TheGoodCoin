@@ -5,6 +5,13 @@ import AddProduct from "./routes/AddProduct";
 import MarketPlace from "./routes/MarketPlace";
 import Profile from "./routes/Profile";
 import Nav from "./components/Nav";
+import { Web3ReactProvider } from '@web3-react/core'
+import Web3 from 'web3'
+import MetamaskProvider from "./components/web3Provider";
+
+function getLibrary(provider) {
+  return new Web3(provider)
+}
 
 function App() {
   return (
@@ -14,8 +21,11 @@ function App() {
         path="/"
         element={
           <div>
-
-              <Nav />
+            <Web3ReactProvider getLibrary={getLibrary}>
+              <MetamaskProvider>
+                <Nav />
+              </MetamaskProvider>
+            </Web3ReactProvider>
           </div>
         }
       />

@@ -7,7 +7,7 @@ import { useWeb3React } from "@web3-react/core";
 function Nav() {
     const [isOpen, setIsOpen] = useState(false);
     
-    const { active, account, library, connector, activate, deactivate } = useWeb3React()
+    const { active, account, library, connector, activate, deactivate } = useWeb3React();
 
     async function connect() {
         try {
