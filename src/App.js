@@ -15,26 +15,26 @@ function getLibrary(provider) {
 
 function App() {
   return (
-    <BrowserRouter>
-    <Router>
-      <Route
-        path="/"
-        element={
-          <div>
-            <Web3ReactProvider getLibrary={getLibrary}>
-              <MetamaskProvider>
-                <Nav />
-              </MetamaskProvider>
-            </Web3ReactProvider>
-          </div>
-        }
-      />
-      <Route path="about" element={<About  />} />
-      <Route path="add-product" element={<AddProduct />} />
-      <Route path="marketplace" element={<MarketPlace />} />
-      <Route path="profile" element={<Profile />} />
-    </Router>
-  </BrowserRouter>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <MetamaskProvider>
+        <Nav />
+        <BrowserRouter>
+          <Router>
+            <Route
+              path="/"
+              element={
+                <div>
+                </div>
+              }
+            />
+            <Route path="about" element={<About />} />
+            <Route path="add-product" element={<AddProduct />} />
+            <Route path="marketplace" element={<MarketPlace />} />
+            <Route path="profile" element={<Profile />} />
+          </Router>
+        </BrowserRouter>
+      </MetamaskProvider>
+    </Web3ReactProvider>
   );
 }
 

@@ -1,14 +1,15 @@
-import React from 'react';
-import { useActiveWeb3React } from "@web3-react/core";
+import React, { useEffect } from 'react';
 
 
 function Profile() {
 
-    // console.log(activate);
+    let account = localStorage.getItem('account');
+    console.log(account);
     
     return (
         <div>
-            <h1>You are connected as: {'account'} </h1>
+            <h1 className="">Welcome ! You wallet address: {account}</h1>
+            <a href="/add-product" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Sell New Product</a>
         </div>
     );
 }
