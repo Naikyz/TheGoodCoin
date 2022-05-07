@@ -29,8 +29,8 @@ function App() {
             />
             <Route path="about" element={<About />} />
             <Route path="add-product" element={<AddProduct />} />
-            <Route path="marketplace" element={<MarketPlace />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="marketplace" element={<MarketPlace />} />
           </Router>
         </BrowserRouter>
       </MetamaskProvider>

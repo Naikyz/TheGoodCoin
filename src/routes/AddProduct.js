@@ -52,14 +52,8 @@ function AddProduct() {
     //     return ipfsJson.data;
     // }
 
-    async function test(e) {
-        e.preventDefault()
-        const ipfsJson = await starton.get("https://api.starton.io/v2/pinning/content/" + name.value);
-        console.log(ipfsJson)
-    }
-
     async function uplaodInDb(e) {
-        e.preventDefault()
+        e.preventDefault();
         let fileCid = await uploadImageOnIpfs(e)
         const resp = await starton.post("https://aleph.sh/vm/6bbcf4ea69725318a41c634b66fb9ef840b10fe1be191abac02f4c62b9a86963/CID/", {
             "name" : name.value,
