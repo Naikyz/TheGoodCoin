@@ -28,7 +28,7 @@ function MarketPlace() {
     return (
         <>
         {ready ?
-        <div className="flex justify-around">
+        <div className="flex flex-wrap justify-around content-center">
             {data.data.map((item) => (<ItemCard key={item.cid} item={item}/>))}
         </div> : <>Chargement ...</>}</>
     );

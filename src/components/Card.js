@@ -5,7 +5,7 @@ import React from "react";
 export default function ItemCard({item}) {
 
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
+        <div className="max-w-sm rounded overflow-hidden shadow-lg mt-12">
             <img className="w-full" src={"https://ipfs.io/ipfs/" + item.cid} alt="Sunset in the mountains"/>
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{item.name}</div>
