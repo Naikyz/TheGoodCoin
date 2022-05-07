@@ -40,7 +40,7 @@ function AddProduct() {
             "name" : name.value,
             "description" : description.value,
             "price" : price.value,
-            "file" : fileCid.pinStatus.pin.cid,
+            "file" : `ipfs://ipfs/${fileCid.pinStatus.pin.cid}`,
         }
 
         const ipfsJson = await starton.post("https://api.starton.io/v2/pinning/content/json", 
@@ -63,9 +63,9 @@ function AddProduct() {
     return (
         <div>
             <form onSubmit={uplaodInDb}>
-                <input type="text" onChange={(event) => setName({value: event.target.value})} />
-                <input type="text" onChange={(event) => setDescription({value: event.target.value})} />
-                <input type="number" onChange={(event) => setPrice({value: event.target.value})} />
+                <input type="text" label="Name" onChange={(event) => setName({value: event.target.value})} />
+                <input type="text" label="Description" onChange={(event) => setDescription({value: event.target.value})} />
+                <input type="number" label="Price" onChange={(event) => setPrice({value: event.target.value})} />
                 <input type="file" name="image" onChange={uploadPicture} />
                 <br />
                 <br />
