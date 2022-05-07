@@ -7,7 +7,6 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 headers = {
-    'x-api-key': 'VN1V84XJ2undibI57qrvFpKSnMlNFDta',
     'Content-Type': 'application/json'
 }
 
@@ -35,7 +34,11 @@ async def create_watcher(params: dict):
         f.close()
     else:
         data = []
-    data.append({"name": params["name"], "description": params["description"],"price": params["price"], "cid": params["cid"]})
+    for d in data:
+        if d["CID"] == params["CID"]:
+            return 400
+
+    data.append({"name": params["name"], "description": params["description"],"price": params["price"], "CID": params["CID"]})
     print(data)
     f = open("./save.json", "w")
     f.write(dumps(data))
@@ -60,9 +63,11 @@ async def delete_watcher(params: dict):
         f = open("./save.json", "r")
         data = loads(f.read())
         f.close()
+        for d in data:
+            if d["CID"] == params["CID"]:
+                data.remove(d)
     else:
         data = []
-    data.remove(params["CID"])
     f = open("./save.json", "w")
     f.write(dumps(data))
     f.close()
