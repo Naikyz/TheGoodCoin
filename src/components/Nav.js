@@ -11,7 +11,6 @@ function Nav() {
 
     useEffect(() => {
         localStorage.setItem('account', account);
-        console.log(account);
     }, [account, isConnected]);
 
 
