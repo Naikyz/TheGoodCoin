@@ -33,34 +33,44 @@ function AddProduct() {
         return ipfsImg.data;
     }
 
-    async function uploadJsonOnIpfs(e) {
-        e.preventDefault()
-        let fileCid = await uploadImageOnIpfs(e)
-        let json = {
-            "name" : name.value,
-            "description" : description.value,
-            "price" : price.value,
-            "file" : fileCid.pinStatus.pin.cid,
-        }
+    // async function uploadJsonOnIpfs(e) {
+    //     e.preventDefault()
+    //     let fileCid = await uploadImageOnIpfs(e)
+    //     let json = {
+    //         "name" : name.value,
+    //         "description" : description.value,
+    //         "price" : price.value,
+    //         "file" : `ipfs://ipfs/${fileCid.pinStatus.pin.cid}`,
+    //     }
 
-        const ipfsJson = await starton.post("https://api.starton.io/v2/pinning/content/json", 
-        {
-            name: name.value,
-            content: json,
-            isSync: true
-        });
-        return ipfsJson.data;
+    //     const ipfsJson = await starton.post("https://api.starton.io/v2/pinning/content/json", 
+    //     {
+    //         name: name.value,
+    //         content: json,
+    //         isSync: true
+    //     });
+    //     return ipfsJson.data;
+    // }
+
+    async function test(e) {
+        e.preventDefault()
+        const ipfsJson = await starton.get("https://api.starton.io/v2/pinning/content/" + name.value);
+        console.log(ipfsJson)
     }
 
     async function uplaodInDb(e) {
         e.preventDefault()
-        const ipfsImg = await uploadJsonOnIpfs(e);
-        const resp = await starton.post("https://aleph.sh/vm/5e0e06e9817d362c4d2eda531c62aaa99caef2c30eeca9b04cd57ba3ee3599d1/CID/", {
-            "CID" : ipfsImg.pinStatus.pin.cid
+        let fileCid = await uploadImageOnIpfs(e)
+        const resp = await starton.post("https://aleph.sh/vm/6bbcf4ea69725318a41c634b66fb9ef840b10fe1be191abac02f4c62b9a86963/CID/", {
+            "name" : name.value,
+            "description" : description.value,
+            "price" : price.value,
+            "cid" : fileCid.pinStatus.pin.cid,
         });
     }
 
     return (
+<<<<<<< HEAD
         <div className="flex justify-center items-center bg-center mt-10">
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={uplaodInDb}>
                 <div className="mb-4">
@@ -78,6 +88,17 @@ function AddProduct() {
                 <div className="mb-6">
                     <input className="pt-6 pb-8 mb-4" type="file" name="image" onChange={uploadPicture} />
                     <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="submit" name="upload">
+=======
+        <div>
+            <form onSubmit={uplaodInDb}>
+                <input type="text" label="Name" onChange={(event) => setName({value: event.target.value})} />
+                <input type="text" label="Description" onChange={(event) => setDescription({value: event.target.value})} />
+                <input type="number" label="Price" onChange={(event) => setPrice({value: event.target.value})} />
+                <input type="file" name="image" onChange={uploadPicture} />
+                <br />
+                <br />
+                <button type="submit" name="upload">
+>>>>>>> f5d7dc64dc87061027bb875dfdc5b63d33231fba
                     Upload
                     </button>
                 </div>
