@@ -16,7 +16,7 @@ function MarketPlace() {
     useEffect(() => {
 
         async function getData() {
-            setData(await starton.get("https://aleph.sh/vm/6bbcf4ea69725318a41c634b66fb9ef840b10fe1be191abac02f4c62b9a86963/CID/"));
+            setData(await starton.get("https://aleph.sh/vm/e3e1ccaa0d569d3a9890c3a501be4407449b76cd2ec8d170d1d80c7c7b2e198d/CID/"));
             setReady(true);
         }
 
@@ -29,7 +29,7 @@ function MarketPlace() {
         <>
         {ready ?
         <div className="flex flex-wrap justify-around content-center">
-            {data.data.map((item) => (<ItemCard key={item.cid} item={item}/>))}
+            {data.data.map((item) => (<ItemCard key={item.CID} item={item}/>))}
         </div> : <>Chargement ...</>}</>
     );
 }

@@ -40,7 +40,7 @@ function AddProduct() {
     //         "name" : name.value,
     //         "description" : description.value,
     //         "price" : price.value,
-    //         "file" : `ipfs://ipfs/${fileCid.pinStatus.pin.cid}`,
+    //         "file" : `ipfs://ipfs/${fileCid.pinStatus.pin.CID}`,
     //     }
 
     //     const ipfsJson = await starton.post("https://api.starton.io/v2/pinning/content/json", 
@@ -55,11 +55,11 @@ function AddProduct() {
     async function uplaodInDb(e) {
         e.preventDefault();
         let fileCid = await uploadImageOnIpfs(e)
-        const resp = await starton.post("https://aleph.sh/vm/6bbcf4ea69725318a41c634b66fb9ef840b10fe1be191abac02f4c62b9a86963/CID/", {
+        const resp = await starton.post("https://aleph.sh/vm/e3e1ccaa0d569d3a9890c3a501be4407449b76cd2ec8d170d1d80c7c7b2e198d/CID/", {
             "name" : name.value,
             "description" : description.value,
             "price" : price.value,
-            "cid" : fileCid.pinStatus.pin.cid,
+            "CID" : fileCid.pinStatus.pin.cid,
         });
     }
 
