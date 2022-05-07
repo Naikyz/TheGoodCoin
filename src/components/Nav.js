@@ -31,11 +31,13 @@ function Nav() {
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center">
                             <div className="flex-shrink-0">
+                                <a href="/">
                                 <img
                                     className="h-8 w-8"
                                     src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                                     alt="Workflow"
                                 />
+                                </a>
                             </div>
                             <div className="hidden md:block">
                                 {active ? <div className="ml-10 flex items-baseline space-x-4">

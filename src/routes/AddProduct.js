@@ -70,7 +70,6 @@ function AddProduct() {
     }
 
     return (
-<<<<<<< HEAD
         <div className="flex justify-center items-center bg-center mt-10">
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={uplaodInDb}>
                 <div className="mb-4">
@@ -88,17 +87,6 @@ function AddProduct() {
                 <div className="mb-6">
                     <input className="pt-6 pb-8 mb-4" type="file" name="image" onChange={uploadPicture} />
                     <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="submit" name="upload">
-=======
-        <div>
-            <form onSubmit={uplaodInDb}>
-                <input type="text" label="Name" onChange={(event) => setName({value: event.target.value})} />
-                <input type="text" label="Description" onChange={(event) => setDescription({value: event.target.value})} />
-                <input type="number" label="Price" onChange={(event) => setPrice({value: event.target.value})} />
-                <input type="file" name="image" onChange={uploadPicture} />
-                <br />
-                <br />
-                <button type="submit" name="upload">
->>>>>>> f5d7dc64dc87061027bb875dfdc5b63d33231fba
                     Upload
                     </button>
                 </div>

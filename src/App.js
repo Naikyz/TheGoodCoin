@@ -24,6 +24,7 @@ function App() {
               path="/"
               element={
                 <div>
+                  <h1 className="text-6xl font-normal leading-normal mt-0 mb-2 text-center">Welcome in TheGoodCoin</h1>
                 </div>
               }
             />
