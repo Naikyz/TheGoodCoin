@@ -33,30 +33,39 @@ function AddProduct() {
         return ipfsImg.data;
     }
 
-    async function uploadJsonOnIpfs(e) {
-        e.preventDefault()
-        let fileCid = await uploadImageOnIpfs(e)
-        let json = {
-            "name" : name.value,
-            "description" : description.value,
-            "price" : price.value,
-            "file" : `ipfs://ipfs/${fileCid.pinStatus.pin.cid}`,
-        }
+    // async function uploadJsonOnIpfs(e) {
+    //     e.preventDefault()
+    //     let fileCid = await uploadImageOnIpfs(e)
+    //     let json = {
+    //         "name" : name.value,
+    //         "description" : description.value,
+    //         "price" : price.value,
+    //         "file" : `ipfs://ipfs/${fileCid.pinStatus.pin.cid}`,
+    //     }
 
-        const ipfsJson = await starton.post("https://api.starton.io/v2/pinning/content/json", 
-        {
-            name: name.value,
-            content: json,
-            isSync: true
-        });
-        return ipfsJson.data;
+    //     const ipfsJson = await starton.post("https://api.starton.io/v2/pinning/content/json", 
+    //     {
+    //         name: name.value,
+    //         content: json,
+    //         isSync: true
+    //     });
+    //     return ipfsJson.data;
+    // }
+
+    async function test(e) {
+        e.preventDefault()
+        const ipfsJson = await starton.get("https://api.starton.io/v2/pinning/content/" + name.value);
+        console.log(ipfsJson)
     }
 
     async function uplaodInDb(e) {
         e.preventDefault()
-        const ipfsImg = await uploadJsonOnIpfs(e);
-        const resp = await starton.post("https://aleph.sh/vm/5e0e06e9817d362c4d2eda531c62aaa99caef2c30eeca9b04cd57ba3ee3599d1/CID/", {
-            "CID" : ipfsImg.pinStatus.pin.cid
+        let fileCid = await uploadImageOnIpfs(e)
+        const resp = await starton.post("https://aleph.sh/vm/6bbcf4ea69725318a41c634b66fb9ef840b10fe1be191abac02f4c62b9a86963/CID/", {
+            "name" : name.value,
+            "description" : description.value,
+            "price" : price.value,
+            "cid" : fileCid.pinStatus.pin.cid,
         });
     }
 
