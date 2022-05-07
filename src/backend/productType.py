@@ -1,8 +1,9 @@
 
 
-class Product():
-    def __init__(self, address, product, product_address, price):
-        self.address = address
-        self.product = product
-        self.product_address = product_address
+class Product:
+    def __init__(self, name, description, price, CID):
+        self.name = name
+        self.description = description
         self.price = price
+        self.CID = CID
+
