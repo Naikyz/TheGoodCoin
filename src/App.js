@@ -9,6 +9,7 @@ import { Web3ReactProvider } from '@web3-react/core'
 import Web3 from 'web3'
 import MetamaskProvider from "./components/web3Provider";
 import Footer from "./components/Footer";
+import Example from "./components/PopUp";
 
 function getLibrary(provider) {
   return new Web3(provider)
