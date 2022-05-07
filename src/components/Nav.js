@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import { injected } from "./wallet/Connectors";
 import { useWeb3React } from "@web3-react/core";
-// import { active, account, library, connector, activate, deactivate } from './web3Instance';
 
 function Nav() {
     const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +40,7 @@ function Nav() {
                             <div className="hidden md:block">
                                 {active ? <div className="ml-10 flex items-baseline space-x-4">
                                     <a
-                                        href="/profile/"
+                                        href="profile"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                     >
                                         Profile
@@ -132,10 +131,10 @@ function Nav() {
                         <div className="md:hidden" id="mobile-menu">
                             {active ? <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                                 <a
-                                    href="#"
+                                    href="profile"
                                     className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
                                 >
-                                    Login
+                                    Profile
                                 </a>
 
                                 <a

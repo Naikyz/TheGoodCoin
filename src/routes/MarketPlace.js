@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import ItemCard from "../components/Card";
+import Footer from "../components/Footer"
 axios.defaults.headers['x-api-key'] = '8RT7VQVZUUCux2vbf1Ng0utDldWU6QJo';
 
 
@@ -27,10 +28,16 @@ function MarketPlace() {
 
     return (
         <>
+        <div>
         {ready ?
         <div className="flex flex-wrap justify-around content-center">
             {data.data.map((item) => (<ItemCard key={item.CID} item={item}/>))}
-        </div> : <>Chargement ...</>}</>
+        </div> : <>Chargement ...</>}
+        </div>
+            <footer className="bg-white">  
+                <Footer />
+            </footer>
+        </>
     );
 }
 
