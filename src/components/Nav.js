@@ -6,25 +6,25 @@ import { useWeb3React } from "@web3-react/core";
 
 function Nav() {
     const [isOpen, setIsOpen] = useState(false);
+    const [isConnected, setIsConnected] = useState(false);
     const { active, account, library, connector, activate, deactivate } = useWeb3React();
     
 
     useEffect(() => {
-
         localStorage.setItem('account', account);
-
         console.log(account);
-
-    }, [account]);
+    }, [account, isConnected]);
 
 
     async function connect() {
+        setIsConnected(true);
         try {
             await activate(injected)
         } catch (ex) {
             console.log(ex)
         }
     }
+
     return (
         <div>
             <nav className="bg-gray-800">
