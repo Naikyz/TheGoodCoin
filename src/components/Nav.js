@@ -8,7 +8,6 @@ function Nav() {
     const [isOpen, setIsOpen] = useState(false);
     const [isConnected, setIsConnected] = useState(false);
     const { active, account, library, connector, activate, deactivate } = useWeb3React();
-    
 
     useEffect(() => {
         localStorage.setItem('account', account);

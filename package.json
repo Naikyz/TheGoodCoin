@@ -11,6 +11,7 @@
     "@web3-react/injected-connector": "^6.0.7",
     "axios": "^0.27.2",
     "flowbite": "^1.4.5",
+    "fs": "^0.0.1-security",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
