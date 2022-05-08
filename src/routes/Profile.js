@@ -11,16 +11,31 @@ function Profile() {
     const starton = axios.create({
         baseURL: "https://api.starton.io/v2",
     });
-    const [data, setData] = useState([{}]);
-
-    
-    useEffect(() => {
-        let account = localStorage.getItem('account');
-        setData(starton.get("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/sales/owner/" + account));
-    }, [starton])
+    const [ready, setReady] = useState(false);
+    const [owned, setOwned] = useState([]);
+    const [selling, setSelling] = useState([]);
 
     let account = localStorage.getItem('account');
-    console.log(account);
+
+    async function getOwned(account) {
+        console.log("uhfdufudfhdhfdu")
+        setOwned(await starton.get("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/sales/owner/" + account));
+        setReady(true);
+        console.log(owned)
+    }
+
+    async function getSelling(account) {
+        console.log("uhfdufudfhdhfdu")
+        setSelling(await starton.get("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/sales/seller/" + account));
+        setReady(true);
+        console.log(selling)
+    }
+    
+    useEffect(() => {
+        getOwned(account);
+        getSelling(account);
+    }, [ready])
+
     const ModifiedJazzicon = styled(Jazzicon)({
         width: 100,
         height: 100,
@@ -43,11 +58,11 @@ function Profile() {
                                         <span className="text-sm text-gray-800">Under Delivery</span>
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="font-bold text-2xl">3</span>
+                                        <span className="font-bold text-2xl">{(owned?.data?.length)? owned.data.length : 0}</span>
                                         <span className="text-sm text-gray-800">Received</span>
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="font-bold text-2xl">1</span>
+                                        <span className="font-bold text-2xl">{(selling?.data?.length)? selling.data.length : 0}</span>
                                         <span className="text-sm text-gray-800">Sold Products</span>
                                     </div>
                                 </div>
@@ -64,14 +79,16 @@ function Profile() {
                 </div>
                 <>
                 <div>
-                {data.length ?
+                {owned?.data?.length ?
                 <div className="flex flex-wrap justify-around content-center">
-                    {data.data.map((item) => (<ItemCard key={item.CID} item={item}/>))}
+                    {owned.data.map((item) => (<ItemCard key={item.CID} item={item} owned={true} sold={false}/>))}
                 </div> : <>Chargement ...</>}
+
+                {selling?.data?.length ?
+                <div className="flex flex-wrap justify-around content-center">
+                    {selling.data.map((item) => (<ItemCard key={item.CID} item={item} owned={false} sold={true}/>))}
+                </div> : <></>}
                 </div>
-                    <footer className="bg-white">  
-                        <Footer />
-                    </footer>
                 </>
 
             </div>
