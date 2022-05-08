@@ -81,7 +81,7 @@ function Profile() {
                 <>
                 <div>
                 <div>
-                    <h2 className="block text-gray-700 text-center font-bold mt-11">Buyed Products</h2>
+                    <h2 className="block text-gray-700 text-center font-bold mt-11">Bought Products</h2>
                 </div>
                 {owned?.data?.length ?
                 <div className="flex flex-wrap justify-around content-center">
