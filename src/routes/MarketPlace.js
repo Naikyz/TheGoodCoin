@@ -37,7 +37,7 @@ function MarketPlace() {
         <div>
         {ready ?
         <div className="flex flex-wrap justify-around content-center">
-            {data.data.map((item) => (<ItemCard key={item.CID} item={item} reload={reload}/>))}
+            {data.data.map((item) => (<ItemCard key={item.CID} item={item} reload={reload}  owned={false} sold={false}/>))}
         </div> : <>Chargement ...</>}
         </div>
             <footer className="bg-white">  
