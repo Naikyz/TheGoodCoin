@@ -1,12 +1,15 @@
 import { useState } from "react";
 import React from "react";
 import axios from 'axios';
-axios.defaults.headers['x-api-key'] = '8RT7VQVZUUCux2vbf1Ng0utDldWU6QJo';
+// require('dotenv').config()
+// import express from 'express'
+axios.defaults.headers['x-api-key'] = process.env.REACT_APP_API_KEY;
 
 
 export default function ItemCard({item, reload, owned, sold}) {
 
     const [bought, setBought] = useState(false);
+    // console.log(process.env.API_KEY)
 
     const starton = axios.create({
         baseURL: "https://api.starton.io/v2",
@@ -52,7 +55,7 @@ export default function ItemCard({item, reload, owned, sold}) {
         //     "CID" : item.CID,
         // }});
 
-        await starton.post("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/CID/sales", {
+        await starton.post(process.env.REACT_APP_BACKEND_URL + "/CID/sales", {
             "CID" : item.CID,
             "owner": account,
         });
