@@ -4,6 +4,7 @@ import { Jazzicon } from '@ukstv/jazzicon-react';
 import styled from '@emotion/styled';
 import axios from 'axios';
 import ItemCard from "../components/Card";
+import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 axios.defaults.headers['x-api-key'] = '8RT7VQVZUUCux2vbf1Ng0utDldWU6QJo';
 
 
@@ -48,17 +49,17 @@ function Profile() {
             <div className="h-full py-20 px-3">
                 <div className="max-w-md mx-auto md:max-w-lg">
                     <div className="w-full">
-                        <div className="bg-white p-3 rounded text-center py-5">
+                        <div className="bg-white p-3 text-center py-5 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                             <div className="text-center">
                                 <ModifiedJazzicon address={account} />
                                 <h1 className="text-xl mt-2">Your wallet adress is {account}</h1>
                                 <div className="flex justify-around mt-3 px-4">
                                     <div className="flex flex-col">
-                                        <span className="font-bold text-2xl">19</span>
+                                        <span className="font-bold text-2xl">{(owned?.data?.length)? owned.data.length : 0}</span>
                                         <span className="text-sm text-gray-800">Under Delivery</span>
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="font-bold text-2xl">{(owned?.data?.length)? owned.data.length : 0}</span>
+                                        <span className="font-bold text-2xl">0</span>
                                         <span className="text-sm text-gray-800">Received</span>
                                     </div>
                                     <div className="flex flex-col">
@@ -79,15 +80,20 @@ function Profile() {
                 </div>
                 <>
                 <div>
+                <div>
+                    <h2 className="block text-gray-700 text-center font-bold mt-11">Buyed Products</h2>
+                </div>
                 {owned?.data?.length ?
                 <div className="flex flex-wrap justify-around content-center">
                     {owned.data.map((item) => (<ItemCard key={item.CID} item={item} owned={true} sold={false}/>))}
-                </div> : <>Chargement ...</>}
-
+                </div>: <div className="text-center">0</div>}
+                <div>
+                    <h2 className="block text-gray-700 text-center font-bold mt-11">Sold Products</h2>
+                </div>
                 {selling?.data?.length ?
-                <div className="flex flex-wrap justify-around content-center">
+                <div className="flex flex-wrap justify-around content-center mr-10">
                     {selling.data.map((item) => (<ItemCard key={item.CID} item={item} owned={false} sold={true}/>))}
-                </div> : <></>}
+                </div> : <div className="text-center">0</div>}
                 </div>
                 </>
 

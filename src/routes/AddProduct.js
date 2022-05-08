@@ -33,25 +33,6 @@ function AddProduct() {
         return ipfsImg.data;
     }
 
-    // async function uploadJsonOnIpfs(e) {
-    //     e.preventDefault()
-    //     let fileCid = await uploadImageOnIpfs(e)
-    //     let json = {
-    //         "name" : name.value,
-    //         "description" : description.value,
-    //         "price" : price.value,
-    //         "file" : `ipfs://ipfs/${fileCid.pinStatus.pin.CID}`,
-    //     }
-
-    //     const ipfsJson = await starton.post("https://api.starton.io/v2/pinning/content/json", 
-    //     {
-    //         name: name.value,
-    //         content: json,
-    //         isSync: true
-    //     });
-    //     return ipfsJson.data;
-    // }
-
     async function uplaodInDb(e) {
         e.preventDefault();
         let account = localStorage.getItem('account');
