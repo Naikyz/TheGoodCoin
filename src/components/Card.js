@@ -4,7 +4,7 @@ import axios from 'axios';
 axios.defaults.headers['x-api-key'] = '8RT7VQVZUUCux2vbf1Ng0utDldWU6QJo';
 
 
-export default function ItemCard({item, reload}) {
+export default function ItemCard({item, reload, owned, sold}) {
 
     const [bought, setBought] = useState(false);
 
@@ -48,11 +48,11 @@ export default function ItemCard({item, reload}) {
 
     async function removeInDb() {
         let account = localStorage.getItem('account');
-        await starton.delete("https://aleph.sh/vm/26b8cf21f040ff57c4e96054cf8fd2dc1ce249af10d1e17ca53068c9274045af/CID", {data: {
-            "CID" : item.CID,
-        }});
+        // await starton.delete("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/CID", {data: {
+        //     "CID" : item.CID,
+        // }});
 
-        await starton.post("https://aleph.sh/vm/26b8cf21f040ff57c4e96054cf8fd2dc1ce249af10d1e17ca53068c9274045af/CID/sales", {
+        await starton.post("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/CID/sales", {
             "CID" : item.CID,
             "owner": account,
         });
@@ -69,7 +69,9 @@ export default function ItemCard({item, reload}) {
                 </p>
             </div>
             <div className="px-6 pt-4 pb-2">
-                <button onClick={mintNft} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{item.price} $</button>
+                { owned === false && sold !== true && <button onClick={mintNft} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{item.price} $MATIC</button>}
+                { owned === true && <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Buyed</div>}
+                { sold === true && <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Sold</div>}
             </div>
         </div>
     );
