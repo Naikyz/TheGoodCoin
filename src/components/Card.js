@@ -1,26 +1,13 @@
 import { useState } from "react";
 import React from "react";
 import axios from 'axios';
-<<<<<<< HEAD
 import Modal from "./Modal";
 axios.defaults.headers['x-api-key'] = '8RT7VQVZUUCux2vbf1Ng0utDldWU6QJo';
-=======
-// require('dotenv').config()
-// import express from 'express'
-axios.defaults.headers['x-api-key'] = process.env.REACT_APP_API_KEY;
->>>>>>> c7910b3bce9d86b09c59490217c00b317b9e4b12
 
 
 export default function ItemCard({ item, reload, owned, sold }) {
 
     const [bought, setBought] = useState(false);
-<<<<<<< HEAD
-    const [modal, setModal] = useState(false);
-
-    function handleOnClick(e) {
-        e.preventDefault();
-        setModal(true);
-=======
     // console.log(process.env.API_KEY)
 
     const starton = axios.create({
@@ -72,7 +59,6 @@ export default function ItemCard({ item, reload, owned, sold }) {
             "owner": account,
         });
         reload()
->>>>>>> c7910b3bce9d86b09c59490217c00b317b9e4b12
     }
 
     return (
@@ -91,17 +77,12 @@ export default function ItemCard({ item, reload, owned, sold }) {
                     {sold === true && <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Sold</div>}
                 </div>
             </div>
-<<<<<<< HEAD
-            {modal && <Modal item={item}/>}
-        </>
-=======
             <div className="px-6 pt-4 pb-2">
                 { owned === false && sold !== true && <button onClick={mintNft} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{item.price} $MATIC</button>}
                 { owned === true && <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Bought</div>}
                 { sold === true && <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Sold</div>}
             </div>
-        </div>
->>>>>>> c7910b3bce9d86b09c59490217c00b317b9e4b12
+        </>
     );
 
 

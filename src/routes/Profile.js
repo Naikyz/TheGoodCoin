@@ -51,7 +51,7 @@ function Profile() {
                     <div className="w-full">
                         <div className="bg-white p-3 text-center py-5 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                             <div className="text-center">
-                                {/* <ModifiedJazzicon address={account} /> */}
+                                <ModifiedJazzicon address={account} />
                                 <h1 className="text-xl mt-2">Your wallet adress is {account}</h1>
                                 <div className="flex justify-around mt-3 px-4">
                                     <div className="flex flex-col">
