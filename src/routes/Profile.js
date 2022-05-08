@@ -1,18 +1,18 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import Footer from "../components/Footer";
-import { Jazzicon } from '@ukstv/jazzicon-react';
-import styled from '@emotion/styled';
+// import { Jazzicon } from '@ukstv/jazzicon-react';
+// import styled from '@emotion/styled';
 
 
 function Profile() {
     let account = localStorage.getItem('account');
     console.log(account);
-    const ModifiedJazzicon = styled(Jazzicon)({
-        width: 100,
-        height: 100,
-        marginLeft: 'auto',
-        marginRight: 'auto'
-      });
+    // const ModifiedJazzicon = styled(Jazzicon)({
+    //     width: 100,
+    //     height: 100,
+    //     marginLeft: 'auto',
+    //     marginRight: 'auto'
+    //   });
 
     return (
         <div>
@@ -21,7 +21,7 @@ function Profile() {
                     <div className="w-full">
                         <div className="bg-white p-3 rounded text-center py-5">
                             <div className="text-center">
-                                <ModifiedJazzicon address={account} />
+                                {/* <ModifiedJazzicon address={account} /> */}
                                 <h1 className="text-xl mt-2">Your wallet adress is {account}</h1>
                                 <div className="flex justify-around mt-3 px-4">
                                     <div className="flex flex-col">
