@@ -13,16 +13,16 @@ Or notre objectif est de pouvoir le mettre en place avec un système de suivi de
 **Explication du système de suivi**
 
 Etape de mise en vente et d'achat:
-Le vendeur va mettre en ligne son produit -> Un nft va donc être générer avec les informations de ce produit.
-L'acheteur va venir acheter ce produit directement sur notre plateforme -> Une transaction va être réalisé de l'acheteur vers la plateforme.
-Les fonds et le NFT vont être stocké dans le contrat en attendant différentes validations des étapes intermédiaire.
+- Le vendeur va mettre en ligne son produit -> Un nft va donc être générer avec les informations de ce produit.
+- L'acheteur va venir acheter ce produit directement sur notre plateforme -> Une transaction va être réalisé de l'acheteur vers la plateforme.
+- Les fonds et le NFT vont être stocké dans le contrat en attendant différentes validations des étapes intermédiaire.
 
 Etape de livraison:
-Le livreur (sous forme de point relais) va valider la réception du Colis remis par le vendeur -> Première étape
-Différentes étapes de livraison intermédiaire vont être mises en place pour instoré un suivi en temps réel de la livraison -> Seconde étape
-Le point relais qui va recevoir le colis va valider la réception du Colis remis par le livreur -> Troisième étape, l'acheteur reçois à ce moment là le NFT dans son wallet pour attester de l'authenticité de sa commande.
-L'acheteur va donc se rendre dans ce point relais et envoyer (sous forme d'un système simplifié) le nft au point relais -> Dernière étape
-Lorsque que l'authenticité du nft aura été validé par le point relais, le vendeur recevra les fonds bloqués sur son wallet, et l'acheteur pourra récupérer son colis.
+- Le livreur (sous forme de point relais) va valider la réception du Colis remis par le vendeur -> Première étape
+- Différentes étapes de livraison intermédiaire vont être mises en place pour instoré un suivi en temps réel de la livraison -> Seconde étape
+- Le point relais qui va recevoir le colis va valider la réception du Colis remis par le livreur -> Troisième étape, l'acheteur reçois à ce moment là le NFT dans son wallet pour attester de l'authenticité de sa commande.
+- L'acheteur va donc se rendre dans ce point relais et envoyer (sous forme d'un système simplifié) le nft au point relais -> Dernière étape
+- Lorsque que l'authenticité du nft aura été validé par le point relais, le vendeur recevra les fonds bloqués sur son wallet, et l'acheteur pourra récupérer son colis.
 Le NFT sera alors Burn pour pouvoir achever le processus de livraison.
 
 Nous avons pour réaliser ce projet utilisé :
