@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import ItemCard from "../components/Card";
 import Footer from "../components/Footer"
-axios.defaults.headers['x-api-key'] = '8RT7VQVZUUCux2vbf1Ng0utDldWU6QJo';
+axios.defaults.headers['x-api-key'] = process.env.REACT_APP_API_KEY;
 
 
 function MarketPlace() {
@@ -15,12 +15,12 @@ function MarketPlace() {
     const [data, setData] = useState([{}]);
     
     async function getData() {
-        setData(await starton.get("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/CID"));
+        setData(await starton.get(process.env.REACT_APP_BACKEND_URL + "/CID"));
         setReady(true);
     }
 
     async function reload() {
-        setData(await starton.get("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/CID"));
+        setData(await starton.get(process.env.REACT_APP_BACKEND_URL + "/CID"));
         setReady(true);
     }
 
