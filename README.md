@@ -34,7 +34,22 @@ Notre plus grand défi technique a été de décentraliser entièrement l'applic
 Pour y remédier, nous avons utilisé Aleph qui est un service pemettant d'heberger des machines virtuelles de façon décentralisé.
 
 ## Installation
-*Expliquez, étape par étape, comment quelqu'un peut installer votre projet et jouer avec. Le jury utilisera principalement MacOS, Ubuntu, Android et iOS. Mettre en place un docker / docker-compose est une bonne idée pour permettre à quelqu'un de tester facilement le projet.*
+Pour installer notre FrontEnd, vous devez executer:
+
+`
+git clone git@github.com:Naikyz/TheGoodCoin.git && cd TheGoodCoin && npm i && npm start
+`
+
+Notre backend utilise la technologie AlpehVms.
+Aleph est actuellement en production (beta) mais il est possible que les VMs soit encore instable et que les données soient perdues,
+pour remédier à ce problème, vous pouvez vous même lancer la VM en installant [Aleph](https://github.com/aleph-im/aleph-vm/blob/main/tutorials/README.md) et run (au root de notre repo):
+`
+aleph program ./backend main:app
+`
+Si vous instancier une nouvelle AlpehVm, veuillez indiquer dans le fichier .env le nouveau liens vers celle-ci
+`
+ALEPH_URL=[YOUR_URL]
+`
 
 ## Équipe et commentaires
 TheGoodCoin (by Ismael, Victor, Alexandre, Maxence, Kylian)
