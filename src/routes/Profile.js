@@ -12,15 +12,14 @@ function Profile() {
         baseURL: "https://api.starton.io/v2",
     });
     const [data, setData] = useState([{}]);
-
     
     useEffect(() => {
         let account = localStorage.getItem('account');
         setData(starton.get("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/sales/owner/" + account));
     }, [starton])
-
+    
+    console.log(data);
     let account = localStorage.getItem('account');
-    console.log(account);
     const ModifiedJazzicon = styled(Jazzicon)({
         width: 100,
         height: 100,
@@ -66,7 +65,7 @@ function Profile() {
                 <div>
                 {data.length ?
                 <div className="flex flex-wrap justify-around content-center">
-                    {data.data.map((item) => (<ItemCard key={item.CID} item={item}/>))}
+                    {/* {data.map((item) => (<ItemCard key={item.CID} item={item}/>))} */}
                 </div> : <>Chargement ...</>}
                 </div>
                     <footer className="bg-white">  
