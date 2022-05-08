@@ -48,11 +48,11 @@ export default function ItemCard({item, reload}) {
 
     async function removeInDb() {
         let account = localStorage.getItem('account');
-        await starton.delete("https://aleph.sh/vm/26b8cf21f040ff57c4e96054cf8fd2dc1ce249af10d1e17ca53068c9274045af/CID", {data: {
+        await starton.delete("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/CID", {data: {
             "CID" : item.CID,
         }});
 
-        await starton.post("https://aleph.sh/vm/26b8cf21f040ff57c4e96054cf8fd2dc1ce249af10d1e17ca53068c9274045af/CID/sales", {
+        await starton.post("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/CID/sales", {
             "CID" : item.CID,
             "owner": account,
         });
