@@ -16,8 +16,7 @@ function Profile() {
 
     return (
         <div>
-            <div className="h-screen py-20 px-3">
-
+            <div className="h-full py-20 px-3">
                 <div className="max-w-md mx-auto md:max-w-lg">
                     <div className="w-full">
                         <div className="bg-white p-3 rounded text-center py-5">
@@ -33,6 +32,10 @@ function Profile() {
                                         <span className="font-bold text-2xl">3</span>
                                         <span className="text-sm text-gray-800">Received</span>
                                     </div>
+                                    <div className="flex flex-col">
+                                        <span className="font-bold text-2xl">1</span>
+                                        <span className="text-sm text-gray-800">Sold Products</span>
+                                    </div>
                                 </div>
 
                                 <div className="flex flex-row px-4 mt-4">
@@ -45,7 +48,6 @@ function Profile() {
                         </div>
                     </div>
                 </div>
-
             </div>
             <footer className="bg-white">
                 <Footer />
