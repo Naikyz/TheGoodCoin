@@ -3,7 +3,7 @@ import axios from 'axios';
 axios.defaults.headers['x-api-key'] = '8RT7VQVZUUCux2vbf1Ng0utDldWU6QJo';
 
 
-export default function ItemCard({item}) {
+export default function ItemCard({item, reload}) {
 
     const starton = axios.create({
         baseURL: "https://api.starton.io/v2",
@@ -40,9 +40,16 @@ export default function ItemCard({item}) {
     }
 
     async function removeInDb() {
-        const resp = await starton.delete("https://aleph.sh/vm/e3e1ccaa0d569d3a9890c3a501be4407449b76cd2ec8d170d1d80c7c7b2e198d/CID/", {data: {
+        let account = localStorage.getItem('account');
+        await starton.delete("https://aleph.sh/vm/26b8cf21f040ff57c4e96054cf8fd2dc1ce249af10d1e17ca53068c9274045af/CID", {data: {
             "CID" : item.CID,
         }});
+
+        await starton.post("https://aleph.sh/vm/26b8cf21f040ff57c4e96054cf8fd2dc1ce249af10d1e17ca53068c9274045af/CID/sales", {
+            "CID" : item.CID,
+            "owner": account,
+        });
+        reload()
     }
 
     return (

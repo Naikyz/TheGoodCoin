@@ -55,7 +55,7 @@ function AddProduct() {
     async function uplaodInDb(e) {
         e.preventDefault();
         let fileCid = await uploadImageOnIpfs(e)
-        const resp = await starton.post("https://aleph.sh/vm/e3e1ccaa0d569d3a9890c3a501be4407449b76cd2ec8d170d1d80c7c7b2e198d/CID/", {
+        const resp = await starton.post("https://aleph.sh/vm/26b8cf21f040ff57c4e96054cf8fd2dc1ce249af10d1e17ca53068c9274045af/CID", {
             "name" : name.value,
             "description" : description.value,
             "price" : price.value,

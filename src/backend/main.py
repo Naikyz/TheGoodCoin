@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from json import dumps, loads
 from os.path import exists
 from fastapi.middleware.cors import CORSMiddleware
+# import uvicorn
 
 app = FastAPI()
 
@@ -104,3 +105,6 @@ async def get_sales(owner: str):
     else:
         data = []
     return [d["item"] for d in data if d["owner"] == owner]
+
+# if __name__ == "__main__":
+#     uvicorn.run(app, host="0.0.0.0", port=8080)

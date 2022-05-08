@@ -13,13 +13,19 @@ function MarketPlace() {
 
     const [ready, setReady] = useState(false);
     const [data, setData] = useState([{}]);
+    
+    async function getData() {
+        setData(await starton.get("https://aleph.sh/vm/26b8cf21f040ff57c4e96054cf8fd2dc1ce249af10d1e17ca53068c9274045af/CID"));
+        setReady(true);
+    }
+
+    async function reload() {
+        setData(await starton.get("https://aleph.sh/vm/26b8cf21f040ff57c4e96054cf8fd2dc1ce249af10d1e17ca53068c9274045af/CID"));
+        setReady(true);
+    }
 
     useEffect(() => {
 
-        async function getData() {
-            setData(await starton.get("https://aleph.sh/vm/e3e1ccaa0d569d3a9890c3a501be4407449b76cd2ec8d170d1d80c7c7b2e198d/CID/"));
-            setReady(true);
-        }
 
         getData();
 
@@ -31,7 +37,7 @@ function MarketPlace() {
         <div>
         {ready ?
         <div className="flex flex-wrap justify-around content-center">
-            {data.data.map((item) => (<ItemCard key={item.CID} item={item}/>))}
+            {data.data.map((item) => (<ItemCard key={item.CID} item={item} reload={reload}/>))}
         </div> : <>Chargement ...</>}
         </div>
             <footer className="bg-white">  
