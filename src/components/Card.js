@@ -1,9 +1,12 @@
+import { useState } from "react";
 import React from "react";
 import axios from 'axios';
 axios.defaults.headers['x-api-key'] = '8RT7VQVZUUCux2vbf1Ng0utDldWU6QJo';
 
 
 export default function ItemCard({item, reload}) {
+
+    const [bought, setBought] = useState(false);
 
     const starton = axios.create({
         baseURL: "https://api.starton.io/v2",
@@ -26,6 +29,10 @@ export default function ItemCard({item, reload}) {
     }
 
     async function mintNft() {
+        console.log(bought)
+        if (bought)
+            return
+        setBought(true)
         let metadata = await uploadJsonOnIpfs();
         let account = localStorage.getItem('account');
         const nft = await starton.post(`/smart-contract/polygon-mumbai/0xa85861b90aB64efdC965a7C03C8721Be18981b0b/call`,
