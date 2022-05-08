@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import axios from 'axios';
 import ItemCard from "../components/Card";
 import { ScrollMenu } from 'react-horizontal-scrolling-menu';
-axios.defaults.headers['x-api-key'] = '8RT7VQVZUUCux2vbf1Ng0utDldWU6QJo';
+axios.defaults.headers['x-api-key'] = process.env.REACT_APP_API_KEY;
 
 
 function Profile() {
@@ -20,14 +20,14 @@ function Profile() {
 
     async function getOwned(account) {
         console.log("uhfdufudfhdhfdu")
-        setOwned(await starton.get("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/sales/owner/" + account));
+        setOwned(await starton.get(process.env.REACT_APP_BACKEND_URL + "/sales/owner/" + account));
         setReady(true);
         console.log(owned)
     }
 
     async function getSelling(account) {
         console.log("uhfdufudfhdhfdu")
-        setSelling(await starton.get("https://aleph.sh/vm/d21949b4839ac48766cfa68c7b73eb88f31362bddf8857a096108c2ec4bc55b7/sales/seller/" + account));
+        setSelling(await starton.get(process.env.REACT_APP_BACKEND_URL + "/sales/seller/" + account));
         setReady(true);
         console.log(selling)
     }
@@ -81,7 +81,7 @@ function Profile() {
                 <>
                 <div>
                 <div>
-                    <h2 className="block text-gray-700 text-center font-bold mt-11">Buyed Products</h2>
+                    <h2 className="block text-gray-700 text-center font-bold mt-11">Bought Products</h2>
                 </div>
                 {owned?.data?.length ?
                 <div className="flex flex-wrap justify-around content-center">

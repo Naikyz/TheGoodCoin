@@ -14,7 +14,8 @@ function getLibrary(provider) {
 }
 
 function App() {
-  return (
+    console.log(process.env)
+    return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <MetamaskProvider>
         <Nav />
@@ -47,13 +48,8 @@ function App() {
                       <div className="flex flex-wrap">
                         <div className="w-5/6 sm:w-1/2 p-6">
                           <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
-                            Millions of classified ads and as many opportunities to treat yourself.
+                            Soon, millions of classified ads and as many opportunities to treat yourself.
                           </h3>
-                          <p className="text-gray-600 mb-8">
-                            aaa
-                            <br />
-                            <br />
-                          </p>
                         </div>
                         <div className="w-full sm:w-1/2 p-6">
                           <svg className="w-full sm:h-64 mx-auto" viewBox="0 0 1177 598.5" xmlns="http://www.w3.org/2000/svg">
@@ -69,8 +65,8 @@ function App() {
                               d="M119.9,721.42c-3-5.51.4-12.27,4.29-17.18s8.61-10,8.51-16.29c-.15-9-9.7-14.31-17.33-19.09a84,84,0,0,1-15.56-12.51A22.8,22.8,0,0,1,95,650c-1.58-3.52-1.54-7.52-1.44-11.37q.51-19.26,1.91-38.49"
                               fill="none"
                               stroke="#3f3d56"
-                              stroke-miterlimit="10"
-                              stroke-width="4"
+                              strokeMiterlimit="10"
+                              strokeWidth="4"
                             />
                             <path transform="translate(-11.5 -150.75)" d="M81,599.39a14,14,0,0,1,7-11.5l3.14,6.22-.1-7.53a14.22,14.22,0,0,1,4.63-.56A14,14,0,1,1,81,599.39Z" fill="#57b894" />
                             <path transform="translate(-11.5 -150.75)" d="M106,694.38a14,14,0,1,0-.68-11.3l8.77,7.13L104.46,688A14,14,0,0,0,106,694.38Z" fill="#57b894" />
@@ -96,19 +92,19 @@ function App() {
                             <circle cx="193" cy="127.75" r="6" fill="#ff6347" />
                             <circle cx="208" cy="127.75" r="6" fill="#ff6347" />
                             <circle cx="223" cy="127.75" r="6" fill="#ff6347" />
-                            <path transform="translate(-11.5 -150.75)" d="M387.5,490A66.5,66.5,0,1,1,321,423.5,66.47,66.47,0,0,1,387.5,490Z" fill="none" stroke="#f2f2f2" stroke-miterlimit="10" stroke-width="2" />
-                            <path transform="translate(-11.5 -150.75)" d="M325.38,467.23l8.3,13,35.53,55.59a66.5,66.5,0,0,1-103.32-8.57l43.54-84.94.91,1.43" fill="none" stroke="#f2f2f2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                            <path transform="translate(-11.5 -150.75)" d="M387.5,490A66.5,66.5,0,1,1,321,423.5,66.47,66.47,0,0,1,387.5,490Z" fill="none" stroke="#f2f2f2" strokeMiterlimit="10" strokeWidth="2" />
+                            <path transform="translate(-11.5 -150.75)" d="M325.38,467.23l8.3,13,35.53,55.59a66.5,66.5,0,0,1-103.32-8.57l43.54-84.94.91,1.43" fill="none" stroke="#f2f2f2" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" />
                             <path
                               transform="translate(-11.5 -150.75)"
                               d="M385.31,507a66.46,66.46,0,0,1-16.1,28.82l-35.53-55.59,15.69-24.78a.66.66,0,0,1,1.1,0C353.76,460.32,371,486,385.31,507Z"
                               fill="none"
                               stroke="#f2f2f2"
-                              stroke-miterlimit="10"
-                              stroke-width="2"
+                              strokeMiterlimit="10"
+                              strokeWidth="2"
                             />
-                            <path transform="translate(-11.5 -150.75)" d="M337.5,452.5a15,15,0,0,1-12.12,14.73l-15-23.51a15,15,0,0,1,27.16,8.78Z" fill="none" stroke="#f2f2f2" stroke-miterlimit="10" stroke-width="2" />
-                            <path transform="translate(-11.5 -150.75)" d="m347.5 481.5" fill="none" stroke="#f2f2f2" stroke-miterlimit="10" stroke-width="2" />
-                            <path transform="translate(-11.5 -150.75)" d="m333.5 480.5" fill="none" stroke="#f2f2f2" stroke-miterlimit="10" stroke-width="2" />
+                            <path transform="translate(-11.5 -150.75)" d="M337.5,452.5a15,15,0,0,1-12.12,14.73l-15-23.51a15,15,0,0,1,27.16,8.78Z" fill="none" stroke="#f2f2f2" strokeMiterlimit="10" strokeWidth="2" />
+                            <path transform="translate(-11.5 -150.75)" d="m347.5 481.5" fill="none" stroke="#f2f2f2" strokeMiterlimit="10" strokeWidth="2" />
+                            <path transform="translate(-11.5 -150.75)" d="m333.5 480.5" fill="none" stroke="#f2f2f2" strokeMiterlimit="10" strokeWidth="2" />
                             <path
                               transform="translate(-11.5 -150.75)"
                               d="M563.51,413.13c-.35,0-1.51,0-1.83,0l-6.61.17a.19.19,0,0,1-.17-.09L545,398.42a1.61,1.61,0,0,0-1.37-.75h-2.41c-.57,0-.77.57-.56,1.1l5.09,14.52a.2.2,0,0,1-.18.28l-12.45.18a.81.81,0,0,1-.67-.31l-3.77-4.58a1.59,1.59,0,0,0-1.28-.62h-1.71a.4.4,0,0,0-.38.54l2,7a1.68,1.68,0,0,1,0,1.21l-2,7a.39.39,0,0,0,.38.53h1.7a1.62,1.62,0,0,0,1.28-.62l3.84-4.64a.82.82,0,0,1,.67-.32l12.38.27a.21.21,0,0,1,.18.28L540.65,434c-.21.53,0,1.1.56,1.1h2.41a1.61,1.61,0,0,0,1.37-.76l9.91-14.81a.2.2,0,0,1,.17-.09l6.61.17c.33,0,1.48,0,1.83,0,4.5,0,7.35-1.45,7.35-3.25S568,413.13,563.51,413.13Z"
@@ -314,8 +310,8 @@ function App() {
                               fill="none"
                               opacity=".8"
                               stroke="#ff6347"
-                              stroke-miterlimit="10"
-                              stroke-width="2"
+                              strokeMiterlimit="10"
+                              strokeWidth="2"
                             />
                             <path
                               transform="translate(-11.697 -13.011)"
@@ -323,8 +319,8 @@ function App() {
                               fill="none"
                               opacity=".8"
                               stroke="#ff6347"
-                              stroke-miterlimit="10"
-                              stroke-width="2"
+                              strokeMiterlimit="10"
+                              strokeWidth="2"
                             />
                             <circle cx="214.07" cy="310.65" r="11.968" fill="#ff6347" />
                             <circle cx="322.2" cy="566.52" r="11.968" fill="#ff6347" />
@@ -339,7 +335,7 @@ function App() {
                               The revolution is in your hands
                             </h3>
                             <p className="text-gray-600 mb-8">
-                              bbb
+                              With this Web3 site, you can discover the new way to sell products from one person to another
                               <br />
                               <br />
                             </p>
@@ -356,14 +352,11 @@ function App() {
                       <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
                         <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                           <div className="flex flex-wrap no-underline hover:no-underline">
-                            <p className="w-full text-gray-600 text-xs md:text-sm px-6">
-                              xGETTING STARTED
-                            </p>
                             <div className="w-full font-bold text-xl text-gray-800 px-6">
-                              Lorem ipsum dolor sit amet.
+                              Peer-to-peer transactions.
                             </div>
                             <p className="text-gray-800 text-base px-6 mb-5">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                              The transaction is done from client to client without the need for a third party service as is currently the case in web2.
                             </p>
                           </div>
                         </div>
@@ -371,14 +364,11 @@ function App() {
                       <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
                         <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                           <div className="flex flex-wrap no-underline hover:no-underline">
-                            <p className="w-full text-gray-600 text-xs md:text-sm px-6">
-                              xGETTING STARTED
-                            </p>
                             <div className="w-full font-bold text-xl text-gray-800 px-6">
-                              Lorem ipsum dolor sit amet.
+                              No data stored.
                             </div>
                             <p className="text-gray-800 text-base px-6 mb-5">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                              You just need a wallet tu use our site, your personnal informations will not be stored.
                             </p>
                           </div>
                         </div>
@@ -386,14 +376,11 @@ function App() {
                       <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
                         <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                           <div className="flex flex-wrap no-underline hover:no-underline">
-                            <p className="w-full text-gray-600 text-xs md:text-sm px-6">
-                              xGETTING STARTED
-                            </p>
                             <div className="w-full font-bold text-xl text-gray-800 px-6">
-                              Lorem ipsum dolor sit amet.
+                              Securized & full decentralized delivery service.
                             </div>
                             <p className="text-gray-800 text-base px-6 mb-5">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                              With our delivery tracking system, you will be able to know in real time where your order is in a totally secure way on the Blockchain.
                             </p>
                           </div>
                         </div>
