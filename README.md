@@ -3,6 +3,7 @@ Notre principal objectif à travers ce projet a été de mettre en place une man
 Aujourd'hui la vente de pair-à-pair nécessite l'implication d'un service Tiers (exemple: Le Bon Coin).
 Le premier problème est que le service tiers va profiter de la transaction sans lui même y participer.
 Le second problème implique les données personnelles qui sont collectées et peuvent alors être réutilisées à des fins commerciale ou autre...
+Pour nous passer du Web2 au Web3 c'est transformer un service Web2 en service Web3 en corigeant les différents problèmes grace à la technologie de la BlockChain
 
 ## Solution
 Notre prototype de projet réalisé en 48h vise alors à proposer une solution entièrement décentralisée qui permet à un utilisateur qui souhaite vendre un bien de pouvoir le faire sans soucier de l'utilisation de ses données et du profit qu'un service tiers pourrait se faire sur sa transaction.

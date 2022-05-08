@@ -48,13 +48,8 @@ function App() {
                       <div className="flex flex-wrap">
                         <div className="w-5/6 sm:w-1/2 p-6">
                           <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
-                            Millions of classified ads and as many opportunities to treat yourself.
+                            Soon, millions of classified ads and as many opportunities to treat yourself.
                           </h3>
-                          <p className="text-gray-600 mb-8">
-                            aaa
-                            <br />
-                            <br />
-                          </p>
                         </div>
                         <div className="w-full sm:w-1/2 p-6">
                           <svg className="w-full sm:h-64 mx-auto" viewBox="0 0 1177 598.5" xmlns="http://www.w3.org/2000/svg">
@@ -340,7 +335,7 @@ function App() {
                               The revolution is in your hands
                             </h3>
                             <p className="text-gray-600 mb-8">
-                              bbb
+                              With this Web3 site, you can discover the new way to sell products from one person to another
                               <br />
                               <br />
                             </p>
@@ -357,14 +352,11 @@ function App() {
                       <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
                         <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                           <div className="flex flex-wrap no-underline hover:no-underline">
-                            <p className="w-full text-gray-600 text-xs md:text-sm px-6">
-                              xGETTING STARTED
-                            </p>
                             <div className="w-full font-bold text-xl text-gray-800 px-6">
-                              Lorem ipsum dolor sit amet.
+                              Peer-to-peer transactions.
                             </div>
                             <p className="text-gray-800 text-base px-6 mb-5">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                              The transaction is done from client to client without the need for a third party service as is currently the case in web2.
                             </p>
                           </div>
                         </div>
@@ -372,14 +364,11 @@ function App() {
                       <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
                         <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                           <div className="flex flex-wrap no-underline hover:no-underline">
-                            <p className="w-full text-gray-600 text-xs md:text-sm px-6">
-                              xGETTING STARTED
-                            </p>
                             <div className="w-full font-bold text-xl text-gray-800 px-6">
-                              Lorem ipsum dolor sit amet.
+                              No data stored.
                             </div>
                             <p className="text-gray-800 text-base px-6 mb-5">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                              You just need a wallet tu use our site, your personnal informations will not be stored.
                             </p>
                           </div>
                         </div>
@@ -387,14 +376,11 @@ function App() {
                       <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
                         <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                           <div className="flex flex-wrap no-underline hover:no-underline">
-                            <p className="w-full text-gray-600 text-xs md:text-sm px-6">
-                              xGETTING STARTED
-                            </p>
                             <div className="w-full font-bold text-xl text-gray-800 px-6">
-                              Lorem ipsum dolor sit amet.
+                              Securized & full decentralized delivery service.
                             </div>
                             <p className="text-gray-800 text-base px-6 mb-5">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                              With our delivery tracking system, you will be able to know in real time where your order is in a totally secure way on the Blockchain.
                             </p>
                           </div>
                         </div>
