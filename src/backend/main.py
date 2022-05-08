@@ -37,7 +37,7 @@ async def create_watcher(params: dict):
         if d["CID"] == params["CID"]:
             return 400
     data.append(
-        {"name": params["name"], "description": params["description"], "price": params["price"], "CID": params["CID"]})
+        {"name": params["name"], "description": params["description"], "price": params["price"], "CID": params["CID"], "seller": params["seller"]})
     print(data)
     f = open("./save.json", "w")
     f.write(dumps(data))
@@ -95,7 +95,7 @@ def create_sale(params: dict):
     return 400
 
 
-@app.get("/sales/{owner}")
+@app.get("/sales/owner/{owner}")
 async def get_sales(owner: str):
     if exists('sales.json'):
         f = open("./sales.json", "r")
@@ -104,3 +104,14 @@ async def get_sales(owner: str):
     else:
         data = []
     return [d["item"] for d in data if d["owner"] == owner]
+
+
+@app.get("/sales/seller/{seller}")
+async def get_sales(seller: str):
+    if exists('sales.json'):
+        f = open("./sales.json", "r")
+        data = loads(f.read())
+        f.close()
+    else:
+        data = []
+    return [d["item"] for d in data if d["item"]["seller"] == seller]
