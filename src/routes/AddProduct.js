@@ -66,20 +66,23 @@ function AddProduct() {
             <form ref={form} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={uplaodInDb}>
                 <h1 className="block text-gray-700 text-center font-bold mb-2" >Enter informations about your product</h1>
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">Name: </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Name of your product" onChange={(event) => setName({value: event.target.value})} />
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Name*: </label>
+                    <input required="required" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Name of your product" onChange={(event) => setName({value: event.target.value})} />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">Description: </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Description of your product" onChange={(event) => setDescription({value: event.target.value})} />
+                    <label className="block text-gray-800 text-sm font-bold mb-2">Description*: </label>
+                    <input required="required" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Description of your product" onChange={(event) => setDescription({value: event.target.value})} />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">Price ($MATIC): </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="1" onChange={(event) => setPrice({value: event.target.value})} />
+                    <label className="block text-gray-800 text-sm font-bold mb-2">Price ($MATIC)*: </label>
+                    <input required="required" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="0" onChange={(event) => setPrice({value: event.target.value})} />
                 </div>
                 <div className="mb-4">
-                    <input className="pt-6 pb-8 mb-4" type="file" name="image" onChange={uploadPicture} />
-                    <button onClick={handleOnClick} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="submit"  name="upload">
+                    <label className="block text-gray-800 text-sm font-bold mb-2">Image of your product*: </label>
+                    <input required="required" className="pt-6 pb-8 mb-4 border rounded p-10" type="file" name="image" onChange={uploadPicture} />
+                </div>
+                <div className="mb-4">
+                <button onClick={handleOnClick} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="submit"  name="upload">
                         Upload
                     </button> 
                 </div>
