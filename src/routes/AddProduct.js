@@ -1,10 +1,22 @@
 import React from 'react';
 import axios from 'axios';
-import { useState, useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Notification from "../components/Notification";
+import { abi } from "../abi.js";
+import Web3 from 'web3'
 const FormData = require("form-data");
 
+
 axios.defaults.headers['x-api-key'] = process.env.REACT_APP_API_KEY;
+
+const ethEnabled = async () => {
+    if (window.ethereum) {
+      await window.ethereum.request({method: 'eth_requestAccounts'});
+        window.web3 = new Web3(Web3.givenProvider)
+      return true;
+    }
+    return false;
+}
 
 function AddProduct() {
     const starton = axios.create({
@@ -16,6 +28,21 @@ function AddProduct() {
     const [picture, setPicture] = useState({});
     const [notif, setNotif] = useState(false);
     const form = useRef(null);
+
+    async function ether() {
+        if (await ethEnabled() === false) console.log("rerbehrhebhebr"); else console.log("bob");
+        console.log(window.web3)
+        var contract = new window.web3.eth.Contract(abi, "0xe57F153653a7ba331B0778A3eC45f99a10ce229f");
+        console.log(abi)
+        contract.methods.createItem(100, "bobb").send({from: "0xdE8Cd88AcF910A8fDbE9936Cb68cB23F5a96157c", value:"10000"})
+        .then(function(res){
+            console.log(res)
+        });
+    }
+
+    useEffect(() => {
+        // ether()
+    }, [])
 
     const uploadPicture = (e) => {
         setPicture({
@@ -63,6 +90,9 @@ function AddProduct() {
         <Notification />
         </div>
         }
+        <button onClick={ether} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="submit"  name="upload">
+                        Upload
+                    </button> 
         <div className="flex justify-center items-center bg-center mt-10">
             <form ref={form} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <h1 className="block text-gray-700 text-center font-bold mb-2" >Enter informations about your product</h1>

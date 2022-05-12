@@ -14,7 +14,6 @@ function getLibrary(provider) {
 }
 
 function App() {
-    console.log(process.env)
     return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <MetamaskProvider>
