@@ -28,20 +28,32 @@ function AddProduct() {
     const [picture, setPicture] = useState({});
     const [notif, setNotif] = useState(false);
     const form = useRef(null);
+    const [contract, setContract] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
 
-    async function ether() {
-        if (await ethEnabled() === false) console.log("rerbehrhebhebr"); else console.log("bob");
-        console.log(window.web3)
-        var contract = new window.web3.eth.Contract(abi, "0xe57F153653a7ba331B0778A3eC45f99a10ce229f");
-        console.log(abi)
-        contract.methods.createItem(100, "bobb").send({from: "0xdE8Cd88AcF910A8fDbE9936Cb68cB23F5a96157c", value:"10000"})
-        .then(function(res){
-            console.log(res)
+    async function initContract() {
+        if (await ethEnabled() === false) console.log("NOT ENABLED"); else console.log("bob");
+        setContract(new window.web3.eth.Contract(abi, "0x1B88D077fbAaf5eCC2FE4691B235Ea81abdc6010"));
+    }
+
+    async function uploadJsonOnIpfs() {
+        let json = {
+            "name" : name,
+            "description" : description,
+            "image" : `ipfs://ipfs/${(await uploadImageOnIpfs()).pinStatus.pin.cid}`,
+        }
+
+        const ipfsJson = await starton.post("https://api.starton.io/v2/pinning/content/json", 
+        {
+            name: name + " nft",
+            content: json,
+            isSync: true
         });
+        return ipfsJson.data;
     }
 
     useEffect(() => {
-        // ether()
+        initContract()
     }, [])
 
     const uploadPicture = (e) => {
@@ -63,24 +75,21 @@ function AddProduct() {
         return ipfsImg.data;
     }
 
-    async function uplaodInDb(e) {
-        e.preventDefault();
-        let account = localStorage.getItem('account');
-        let fileCid = await uploadImageOnIpfs(e)
-        const resp = await starton.post(process.env.REACT_APP_BACKEND_URL + "/CID", {
-            "name" : name.value,
-            "description" : description.value,
-            "price" : price.value,
-            "CID" : fileCid.pinStatus.pin.cid,
-            "seller" : account
-        });
+    async function createItem() {
+        let cid = (await uploadJsonOnIpfs()).pinStatus.pin.cid
+        contract.methods.createItem(price, cid).send({from: window.ethereum.selectedAddress})
+        .on("receipt", function(res){
+            console.log(res)
+            setNotif(true);
+            setIsLoading(false)
+        }).catch((err) => {setIsLoading(false)});
     }
 
-    function handleOnClick(e) {
+    async function handleOnClick(e) {
+        setIsLoading(true)
         e.preventDefault();
-        uplaodInDb(e)
+        await createItem(e)
         form.current.reset();
-        setNotif(true);
     }
     
     return (
@@ -90,32 +99,37 @@ function AddProduct() {
         <Notification />
         </div>
         }
-        <button onClick={ether} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="submit"  name="upload">
-                        Upload
-                    </button> 
         <div className="flex justify-center items-center bg-center mt-10">
             <form ref={form} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <h1 className="block text-gray-700 text-center font-bold mb-2" >Enter informations about your product</h1>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">Name*: </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Name of your product" onChange={(event) => setName({value: event.target.value})} />
+                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Name of your product" onChange={(event) => setName(event.target.value)} />
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-800 text-sm font-bold mb-2">Description*: </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Description of your product" onChange={(event) => setDescription({value: event.target.value})} />
+                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Description of your product" onChange={(event) => setDescription(event.target.value)} />
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-800 text-sm font-bold mb-2">Price ($MATIC)*: </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="0" onChange={(event) => setPrice({value: event.target.value})} />
+                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="0" onChange={(event) => setPrice(event.target.value)} />
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-800 text-sm font-bold mb-2">Image of your product*: </label>
                     <input className="pt-6 pb-8 mb-4 border rounded p-10" type="file" name="image" onChange={uploadPicture} />
                 </div>
                 <div className="mb-4">
-                <button onClick={handleOnClick} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="submit"  name="upload">
-                        Upload
-                    </button> 
+                
+                {!isLoading && <button onClick={handleOnClick} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="submit"  name="upload">
+                    Upload
+                </button> }
+                {isLoading && <button disabled className="inline-flex bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Uploading ...
+                </button> }
                 </div>
                 <div className="mb-4">
                 <   p className="block text-gray-700 text-center font-bold mb-2" >* = Needed section</p>

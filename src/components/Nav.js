@@ -5,21 +5,27 @@ import { useWeb3React } from "@web3-react/core";
 
 function Nav() {
     const [isOpen, setIsOpen] = useState(false);
-    const [isConnected, setIsConnected] = useState(false);
-    const { active, account, activate } = useWeb3React();
+    const [ active, setActive ] = useState();
+    const [account, setAccount ] = useState();
 
     useEffect(() => {
-        localStorage.setItem('account', account);
-    }, [account, isConnected]);
+        getAdresse()
+    }, [account]);
 
+    function getAdresse() {
+        if (window.ethereum.selectedAddress) {
+            setActive(true)
+            setAccount(window.ethereum.selectedAddress)
+            return
+        }
+        setActive(false)
+        setAccount("")
+    }
 
     async function connect() {
-        setIsConnected(true);
-        try {
-            await activate(injected)
-        } catch (ex) {
-            console.log(ex)
-        }
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        if (window.ethereum.selectedAddress)
+            setActive(true)
     }
 
     return (
