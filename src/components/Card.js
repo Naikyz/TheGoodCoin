@@ -25,6 +25,7 @@ export default function ItemCard({itemToSell, reload, owned, sold}) {
     const [contract, setContract] = useState(null)
     const [showModal, setShowModal] = useState(false)
     const [notif, setNotif] = useState(false);
+    const [command, setCommand] = useState(null);
 
     const starton = axios.create({
         baseURL: "https://api.starton.io/v2",
@@ -36,21 +37,28 @@ export default function ItemCard({itemToSell, reload, owned, sold}) {
     }
 
     async function getMetadata() {
-        console.log(itemToSell)
         const ipfsJson = await starton.get("https://ipfs.io/ipfs/" + itemToSell.cid, {headers: {}})
-        console.log(ipfsJson)
-        setItem({name: ipfsJson.data.name, description: ipfsJson.data.description, CID: ipfsJson.data.image, price: itemToSell.price, id: itemToSell.id, balance: itemToSell.balance, timeUnlock: itemToSell.timeUnlock})
-        console.log(item)
+        setItem({name: ipfsJson.data.name, description: ipfsJson.data.description, CID: ipfsJson.data.image, price: itemToSell.price, id: itemToSell.id, balance: itemToSell.balance, timeUnlock: itemToSell.timeUnlock, idCommand: itemToSell.idCommand})
     }
 
     async function buyItem() {
         setShowModal(true);
     }
 
-    async function getUnlockedMoney() {
-        await contract.methods.getUnlockedMoney(item.id).send({from: window.ethereum.selectedAddress})
+    async function getCommand() {
+        console.log(itemToSell.idCommand)
+        await contract.methods.commands(itemToSell.idCommand).call({from: window.ethereum.selectedAddress})
         .then(function(res){
             console.log(res)
+            setCommand(res)
+        }).catch((err) => {
+        });
+    }
+
+    async function getUnlockedMoney() {
+        console.log(item.id)
+        await contract.methods.getUnlockedMoney(item.id).send({from: window.ethereum.selectedAddress})
+        .then(function(res){
             setNotif(true);
         }).catch((err) => {
         });
@@ -60,7 +68,10 @@ export default function ItemCard({itemToSell, reload, owned, sold}) {
         if (!contract)
             initContract();
         getMetadata()
-    }, [])
+        console.log(itemToSell.idCommand)
+    if (contract && itemToSell.idCommand !== undefined)
+        getCommand()
+    }, [contract, itemToSell])
 
     return (
         <>
@@ -79,10 +90,9 @@ export default function ItemCard({itemToSell, reload, owned, sold}) {
                     </p>
                 </div>
                 <div className="px-6 pt-4 pb-2">
-                    { owned === false && sold !== true && <button onClick={buyItem} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{item.price} $MATIC</button>}
-                    { owned === true && <><div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Bought</div>
-                    <button onClick={getUnlockedMoney} className={"inline-block "+ ((item.balance == 0 || item.timeUnlock > new Date().getTime() / 1000)? "bg-red-100" : "bg-green-100") + " rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"}> Haverst {item.balance}</button></>}
-                    { sold === true && <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Sold</div>}
+                    { owned === false && sold !== true && <button onClick={buyItem} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{window.web3.utils.fromWei(item.price)} $BNB</button>}
+                    { owned === true && <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Bought</div>}
+                    { sold === true && command && <button onClick={getUnlockedMoney} className={"inline-block "+ (( command.balance == 0 || command.timeUnlock > new Date().getTime() / 1000)? "bg-red-100" : "bg-green-100") + " rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"}> Haverst {window.web3.utils.fromWei(command.balance)} $BNB</button>}
                 </div>
             </div>
         }

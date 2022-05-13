@@ -80,6 +80,8 @@ function AddProduct() {
 
     async function createItem() {
         let cid = (await uploadJsonOnIpfs()).pinStatus.pin.cid
+        console.log(price)
+        console.log(parseInt(price))
         contract.methods.createItem(price, cid).send({from: window.ethereum.selectedAddress})
         .on("receipt", function(res){
             console.log(res)
@@ -114,8 +116,8 @@ function AddProduct() {
                     <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Description of your product" onChange={(event) => setDescription(event.target.value)} />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-800 text-sm font-bold mb-2">Price ($MATIC)*: </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="0" onChange={(event) => setPrice(event.target.value)} />
+                    <label className="block text-gray-800 text-sm font-bold mb-2">Price ($BNB)*: </label>
+                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="0" onChange={(event) => setPrice(window.web3.utils.toWei((event.target.value).toString()))} />
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-800 text-sm font-bold mb-2">Image of your product*: </label>

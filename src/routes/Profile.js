@@ -26,6 +26,7 @@ function Profile() {
     const [owned, setOwned] = useState([]);
     const [selling, setSelling] = useState([]);
     const [contract, setContract] = useState(null)
+    const [length, setLength] = useState(0)
 
     let account = localStorage.getItem('account');
 
@@ -45,10 +46,14 @@ function Profile() {
     }
 
     async function getSelling(account) {
+        setLength(0)
         await contract.methods.getItemsToSellByAddress(window.ethereum.selectedAddress).call({from: window.ethereum.selectedAddress})
         .then(function(res){
             console.log(res)
             setSelling(res)
+            let temp = 0;
+            res.forEach((item) => {if (item.cid) temp += 1;})
+            setLength(temp)
         }).catch((err) => {
         });
     }
@@ -77,7 +82,7 @@ function Profile() {
                         <div className="bg-white p-3 text-center py-5 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                             <div className="text-center">
                                 <ModifiedJazzicon address={account} />
-                                <h1 className="text-xl mt-2">Your wallet adress is {account}</h1>
+                                <h1 className="text-xl mt-2">Your wallet adress is {window.ethereum.selectedAddress}</h1>
                                 <div className="flex justify-around mt-3 px-4">
                                     <div className="flex flex-col">
                                         <span className="font-bold text-2xl">{(owned?.length)? owned.length : 0}</span>
@@ -88,7 +93,7 @@ function Profile() {
                                         <span className="text-sm text-gray-800">Received</span>
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="font-bold text-2xl">{(selling?.length)? selling.length : 0}</span>
+                                        <span className="font-bold text-2xl">{length}</span>
                                         <span className="text-sm text-gray-800">Sold Products</span>
                                     </div>
                                 </div>
@@ -112,7 +117,7 @@ function Profile() {
                 <div className="flex flex-wrap justify-around content-center">
                     {owned.map((item, index) => {
                     if (item?.cid)
-                        return <ItemCard key={index} itemToSell={{cid: item.cid, price: item.price, id: index, balance: item.balance, timeUnlock: item.timeUnlock}} owned={true} sold={false}/>
+                        return <ItemCard key={index} itemToSell={{cid: item.cid, price: item.price, id: index, timeUnlock: item.timeUnlock}} owned={true} sold={false}/>
                     return
                     })}
                 </div>: <div className="text-center">0</div>}
@@ -123,7 +128,7 @@ function Profile() {
                 <div className="flex flex-wrap justify-around content-center mr-10">
                     {selling.map((item, index) => {
                     if (item?.cid)
-                        return <ItemCard key={index} itemToSell={{cid: item.cid, price: item.price, id: index}} owned={false} sold={item.sold}/>
+                        return <ItemCard key={index} itemToSell={{cid: item.cid, price: item.price, id: index, idCommand: item.idCommand}} owned={false} sold={item.sold}/>
                     return
                 })}
                 </div> : <div className="text-center">0</div>}

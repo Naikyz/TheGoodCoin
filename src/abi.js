@@ -165,6 +165,11 @@ export let abi = [
 						"internalType": "bool",
 						"name": "sold",
 						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "idCommand",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct TheGoodCoin.itemToSell[]",
@@ -206,6 +211,11 @@ export let abi = [
 						"internalType": "bool",
 						"name": "sold",
 						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "idCommand",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct TheGoodCoin.itemToSell[]",
