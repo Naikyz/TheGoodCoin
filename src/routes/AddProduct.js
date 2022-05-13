@@ -7,7 +7,7 @@ import Web3 from 'web3'
 const FormData = require("form-data");
 
 
-axios.defaults.headers['x-api-key'] = process.env.REACT_APP_API_KEY;
+// axios.defaults.headers['x-api-key'] = process.env.REACT_APP_API_KEY;
 
 const ethEnabled = async () => {
     if (window.ethereum) {
@@ -33,21 +33,24 @@ function AddProduct() {
 
     async function initContract() {
         if (await ethEnabled() === false) console.log("NOT ENABLED"); else console.log("bob");
-        setContract(new window.web3.eth.Contract(abi, "0x1B88D077fbAaf5eCC2FE4691B235Ea81abdc6010"));
+        console.log(process.env.REACT_APP_CONTRACT_ADD)
+        setContract(new window.web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADD));
     }
 
     async function uploadJsonOnIpfs() {
         let json = {
             "name" : name,
             "description" : description,
-            "image" : `ipfs://ipfs/${(await uploadImageOnIpfs()).pinStatus.pin.cid}`,
+            "image" : `${(await uploadImageOnIpfs()).pinStatus.pin.cid}`,
         }
 
-        const ipfsJson = await starton.post("https://api.starton.io/v2/pinning/content/json", 
-        {
+        const ipfsJson = await starton.post("https://api.starton.io/v2/pinning/content/json", {
             name: name + " nft",
             content: json,
             isSync: true
+        }, {
+            maxBodyLength: "Infinity",
+            headers: {"x-api-key": process.env.REACT_APP_API_KEY},
         });
         return ipfsJson.data;
     }
@@ -70,7 +73,7 @@ function AddProduct() {
 
         const ipfsImg = await starton.post("https://api.starton.io/v2/pinning/content/file", data, {
             maxBodyLength: "Infinity",
-            headers: {"Content-Type": `multipart/form-data; boundary=${data._boundary}`},
+            headers: {"Content-Type": `multipart/form-data; boundary=${data._boundary}`, "x-api-key": process.env.REACT_APP_API_KEY},
         });
         return ipfsImg.data;
     }

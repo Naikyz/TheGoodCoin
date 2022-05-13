@@ -5,8 +5,18 @@ import styled from '@emotion/styled';
 import axios from 'axios';
 import ItemCard from "../components/Card";
 import { ScrollMenu } from 'react-horizontal-scrolling-menu';
-axios.defaults.headers['x-api-key'] = process.env.REACT_APP_API_KEY;
+import { abi } from "../abi.js";
+import Web3 from 'web3'
+// axios.defaults.headers['x-api-key'] = process.env.REACT_APP_API_KEY;
 
+const ethEnabled = async () => {
+    if (window.ethereum) {
+      await window.ethereum.request({method: 'eth_requestAccounts'});
+        window.web3 = new Web3(Web3.givenProvider)
+      return true;
+    }
+    return false;
+}
 
 function Profile() {
     const starton = axios.create({
@@ -15,27 +25,42 @@ function Profile() {
     const [ready, setReady] = useState(false);
     const [owned, setOwned] = useState([]);
     const [selling, setSelling] = useState([]);
+    const [contract, setContract] = useState(null)
 
     let account = localStorage.getItem('account');
 
+    async function initContract() {
+        if (await ethEnabled() === false) console.log("NOT ENABLED"); else console.log("bob");
+        console.log(abi)
+        setContract(new window.web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADD));
+    }
+
     async function getOwned(account) {
-        console.log("uhfdufudfhdhfdu")
-        setOwned(await starton.get(process.env.REACT_APP_BACKEND_URL + "/sales/owner/" + account));
-        setReady(true);
-        console.log(owned)
+        await contract.methods.getCommandsByAddress(window.ethereum.selectedAddress).call({from: window.ethereum.selectedAddress})
+        .then(function(res){
+            console.log(res)
+            setOwned(res)
+        }).catch((err) => {
+        });
     }
 
     async function getSelling(account) {
-        console.log("uhfdufudfhdhfdu")
-        setSelling(await starton.get(process.env.REACT_APP_BACKEND_URL + "/sales/seller/" + account));
-        setReady(true);
-        console.log(selling)
+        await contract.methods.getItemsToSellByAddress(window.ethereum.selectedAddress).call({from: window.ethereum.selectedAddress})
+        .then(function(res){
+            console.log(res)
+            setSelling(res)
+        }).catch((err) => {
+        });
     }
     
     useEffect(() => {
-        getOwned(account);
-        getSelling(account);
-    }, [ready])
+        if (!contract)
+            initContract()
+        if (contract) {
+            getOwned(account);
+            getSelling(account);
+        }
+    }, [contract])
 
     const ModifiedJazzicon = styled(Jazzicon)({
         width: 100,
@@ -55,7 +80,7 @@ function Profile() {
                                 <h1 className="text-xl mt-2">Your wallet adress is {account}</h1>
                                 <div className="flex justify-around mt-3 px-4">
                                     <div className="flex flex-col">
-                                        <span className="font-bold text-2xl">{(owned?.data?.length)? owned.data.length : 0}</span>
+                                        <span className="font-bold text-2xl">{(owned?.length)? owned.length : 0}</span>
                                         <span className="text-sm text-gray-800">Under Delivery</span>
                                     </div>
                                     <div className="flex flex-col">
@@ -63,7 +88,7 @@ function Profile() {
                                         <span className="text-sm text-gray-800">Received</span>
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="font-bold text-2xl">{(selling?.data?.length)? selling.data.length : 0}</span>
+                                        <span className="font-bold text-2xl">{(selling?.length)? selling.length : 0}</span>
                                         <span className="text-sm text-gray-800">Sold Products</span>
                                     </div>
                                 </div>
@@ -83,16 +108,24 @@ function Profile() {
                 <div>
                     <h2 className="block text-gray-700 text-center font-bold mt-11">Bought Products</h2>
                 </div>
-                {owned?.data?.length ?
+                {owned?.length ?
                 <div className="flex flex-wrap justify-around content-center">
-                    {owned.data.map((item) => (<ItemCard key={item.CID} item={item} owned={true} sold={false}/>))}
+                    {owned.map((item, index) => {
+                    if (item?.cid)
+                        return <ItemCard key={index} itemToSell={{cid: item.cid, price: item.price, id: index, balance: item.balance, timeUnlock: item.timeUnlock}} owned={true} sold={false}/>
+                    return
+                    })}
                 </div>: <div className="text-center">0</div>}
                 <div>
-                    <h2 className="block text-gray-700 text-center font-bold mt-11">Sold Products</h2>
+                    <h2 className="block text-gray-700 text-center font-bold mt-11">Selling Products</h2>
                 </div>
-                {selling?.data?.length ?
+                {selling?.length ?
                 <div className="flex flex-wrap justify-around content-center mr-10">
-                    {selling.data.map((item) => (<ItemCard key={item.CID} item={item} owned={false} sold={true}/>))}
+                    {selling.map((item, index) => {
+                    if (item?.cid)
+                        return <ItemCard key={index} itemToSell={{cid: item.cid, price: item.price, id: index}} owned={false} sold={item.sold}/>
+                    return
+                })}
                 </div> : <div className="text-center">0</div>}
                 </div>
                 </>
